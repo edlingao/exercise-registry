@@ -48,11 +48,14 @@ jobs:
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY}}
+        password: ${{ secrets.SSH_PASSWORD }}
         script: |
           cd ${{ secrets.DIR }}
           git fetch
           git checkout main
           git pull origin main
+        
+          ./bin/migrate.sh
 
-          ./bin/deployed.sh
+          docker compose pull
+          docker compose up -d
