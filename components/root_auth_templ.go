@@ -50,7 +50,7 @@ func RootAuth(vm RootAuthViewModel) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title><meta charset=\"UTF-8\"><link rel=\"icon\" href=\"/favicon.svg\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" href=\"/assets/styles.css\"><script src=\"/assets/htmx.min.js\"></script><script src=\"/assets/events.js\"></script></head><body><main class=\"flex flex-col w-full h-[90dvh]\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title><meta charset=\"UTF-8\"><link rel=\"icon\" href=\"/favicon.svg\"><meta name=\"viewport\" content=\"width=device-width\"><link rel=\"stylesheet\" href=\"/assets/styles.css\"><script src=\"/assets/htmx.min.js\"></script><script src=\"/assets/events.js\"></script></head><body><main class=\"flex flex-col w-full h-[90dvh]\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
