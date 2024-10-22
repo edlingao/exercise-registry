@@ -11,6 +11,7 @@ services:
     volumes:
       - ./migration/main.db:/app/migration/main.db
       - ./.env:/app/.env
+      - ./public:/app/public
     env_file: ".env"
     environment:
       - GO_PORT=${GO_PORT}
