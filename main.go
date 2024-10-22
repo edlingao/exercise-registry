@@ -1,8 +1,10 @@
 package main
 
 import (
+	"embed"
 	"exercise-app/routes"
 	"log"
+	"net/http"
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
@@ -10,9 +12,18 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
+//go:embed all:public
+var public embed.FS
+
 func main() {
 	e := echo.New()
-  e.Use(middleware.Static("public"))
+  e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+    Root: "public",
+    Browse: false,
+    HTML5: false,
+    Filesystem: http.FS(public),
+  }))
+
   e.Use(routes.GetUserIntoContext)
 
 	routes.INDEX.Build(e)

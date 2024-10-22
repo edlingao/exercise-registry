@@ -4,13 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tailwind:dev": "npx tailwindcss -i ./tailwind/index.css -o ./public/assets/styles.css --watch --minify",
-    "templ:dev": "templ generate --watch --cmd=\"go run .\""
+    "tailwind:dev": "tailwindcss -i ./tailwind/index.css -o ./public/assets/styles.css --minify --watch",
+    "templ:dev": "templ generate --watch --cmd=\"go run .\"",
+    "templ:build": "templ generate",
+    "tailwind:build": "tailwindcss -i ./tailwind/index.css -o ./public/assets/styles.css --minify"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "daisyui": "^4.12.13"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.14"
   }
 }
