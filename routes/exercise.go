@@ -15,4 +15,5 @@ func (ex ExerciseRoutes) Build(e *echo.Echo) {
 	exercise_controller := controllers.ExerciseController{}
 	exercise_routes.GET("", exercise_controller.Show)
   exercise_routes.POST("/new", exercise_controller.Create)
+  exercise_routes.DELETE("/delete/:id", exercise_controller.Delete)
 }

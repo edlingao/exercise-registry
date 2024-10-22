@@ -105,3 +105,24 @@ func (e ExerciseController) Create(c echo.Context) error {
     http.StatusOK,
   )
 }
+
+func (e ExerciseController) Delete(c echo.Context) error {
+  id := c.Param("id")
+  id_int, _ := strconv.ParseInt(id, 10, 64)
+
+  _, err := models.EXERCISE.Delete(int(id_int))
+
+  if err != nil {
+    return c.HTML(
+      http.StatusBadGateway,
+      err.Error(),
+    )
+  }
+  
+  c.Response().Header().Set("HX-Trigger", "{ \"exercises:loaded\": \"\" }")
+
+  return c.JSON(http.StatusOK, map[string]string{
+    "message": "Exercise deleted",
+  })
+}
+
