@@ -1,0 +1,46 @@
+package components
+
+import "exercise-app/models"
+
+type ExerciseTableViewModel struct {
+  Exercises []models.Exercise
+  Error error
+}
+
+templ ExerciseTable( vm ExerciseTableViewModel ) {
+
+  if vm.Error != nil {
+    <div class="alert alert-error">{vm.Error.Error()}</div>
+  }
+
+  <div
+    class="w-full max-h-96 overflow-x-auto"
+    hx-get="/exercise"
+    hx-trigger="exercises:loaded from:body"
+    hx-swap="outerHTML"
+  >
+    <table class="table table-pin-rows table-zebra">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Calories</th>
+          <th>Feeling</th>
+        </tr>
+      </thead>
+      <tbody>
+        for _, excercise := range vm.Exercises {
+          <tr class="hover">
+            <td>{excercise.GetID()}</td>
+            <td>{excercise.GetFormattedDate()}</td>
+            <td>{excercise.GetDuration()}</td>
+            <td>{excercise.GetCalories()}</td>
+            <td>{excercise.GetFeeling()}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
+

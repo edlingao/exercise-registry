@@ -1,0 +1,16 @@
+{
+  "name": "excersice-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tailwind:dev": "npx tailwindcss -i ./tailwind/index.css -o ./public/assets/styles.css --watch --minify",
+    "templ:dev": "templ generate --watch --cmd=\"go run .\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "daisyui": "^4.12.13"
+  }
+}
