@@ -71,7 +71,7 @@ func ExerciseForm(vm ExerciseFormViewModel) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label class=\"form-control w-full\"><div class=\"label\"><span class=\"label-text\">Session Feeling</span></div><select class=\"select select-bordered w-full text-base\" name=\"feeling\" required><option value=\"relaxed\">😌 Relaxed</option> <option value=\"normal\">🙂 Normal</option> <option value=\"focused\">😎 Focused</option> <option value=\"inspired\">🚀 Inspired</option> <option value=\"stressed\">😵 Stressed</option></select></label> <label class=\"form-control w-full\"><div class=\"label\"><span class=\"label-text\">Session Time</span></div><div class=\"flex flex-wrap min-w-full w-full justify-start items-center gap-4\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label class=\"form-control w-full\"><div class=\"label\"><span class=\"label-text\">Session Feeling</span></div><select class=\"select select-bordered w-full text-base\" name=\"feeling\" required><option value=\"relaxed\">😌 Relaxed</option> <option value=\"normal\">🙂 Normal</option> <option value=\"focused\">😎 Focused</option> <option value=\"inspired\">🚀 Inspired</option> <option value=\"stressed\">😵 Stressed</option></select></label> <label class=\"form-control w-full\"><div class=\"label\"><span class=\"label-text\">Session Time</span></div><div class=\"flex flex-wrap min-w-full w-full justify-start items-center gap-4 2xl:bg-transparent\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
