@@ -38,17 +38,22 @@ templ ExerciseModal(vm ExerciseFormViewModel) {
 }
 
 templ ExerciseForm(vm ExerciseFormViewModel) {
-  <select
-    class="select select-bordered w-full text-base"
-    name="feeling"
-    required
-  >
-    <option value="relaxed">😌 Relaxed</option>
-    <option value="normal">🙂 Normal</option>
-    <option value="focused">😎 Focused</option>
-    <option value="inspired">🚀 Inspired</option>
-    <option value="stressed">😵 Stressed</option>
-  </select>
+  <label class="form-control w-full">
+    <div class="label">
+      <span class="label-text">Session Feeling</span>
+    </div>
+    <select
+      class="select select-bordered w-full text-base"
+      name="feeling"
+      required
+    >
+      <option value="relaxed">😌 Relaxed</option>
+      <option value="normal">🙂 Normal</option>
+      <option value="focused">😎 Focused</option>
+      <option value="inspired">🚀 Inspired</option>
+      <option value="stressed">😵 Stressed</option>
+    </select>
+  </label>
 
   <label
     class="form-control w-full"
@@ -56,7 +61,7 @@ templ ExerciseForm(vm ExerciseFormViewModel) {
     <div class="label">
       <span class="label-text">Session Time</span>
     </div>
-    <div class="flex w-full justify-start items-center gap-4">
+    <div class="flex flex-wrap min-w-full w-full justify-start items-center gap-4">
       @Input( InputViewModel{
         Placeholder: "Hours",
         Name: "hours",
