@@ -10,8 +10,11 @@ services:
       - "3000:3000"
     volumes:
       - ./migration/main.db:/app/migration/main.db
+      - ./.env:/app/.env
+    env_file: ".env"
     environment:
-      - NODE_ENV=production
+      - GO_PORT=${GO_PORT}
+      - JWT_SECRET=${JWT_SECRET}
     command: ["/bin/bash", "-c", "./main"]
     network_mode: host
     restart: always
