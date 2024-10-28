@@ -7,6 +7,22 @@ type ExerciseTableViewModel struct {
   Error error
 }
 
+type ExerciseTableColumnViewModel struct {
+  Name string
+  Value string
+  Type string
+  Error error
+  ID string
+  Hours string
+  Minutes string
+}
+
+type DurationInputViewModel struct {
+  Hours string
+  Minutes string
+  Error string
+}
+
 templ ExerciseTable( vm ExerciseTableViewModel ) {
 
   if vm.Error != nil {
@@ -33,12 +49,32 @@ templ ExerciseTable( vm ExerciseTableViewModel ) {
       </thead>
       <tbody>
         for _, excercise := range vm.Exercises {
-          <tr class="hover">
+          <tr class="hover h-24">
             <td>{excercise.GetID()}</td>
-            <td>{excercise.GetFormattedDate()}</td>
-            <td>{excercise.GetDuration()}</td>
-            <td>{excercise.GetCalories()}</td>
-            <td>{excercise.GetFeeling()}</td>
+            @TableColumn(ExerciseTableColumnViewModel{
+              ID: excercise.GetID(),
+              Name: "date",
+              Value: excercise.GetFormattedDate(),
+              Type: "date",
+            })
+            @TableColumn(ExerciseTableColumnViewModel{
+              ID: excercise.GetID(),
+              Name: "duration",
+              Value: excercise.GetDuration(),
+              Type: "text",
+            })
+            @TableColumn(ExerciseTableColumnViewModel{
+              ID: excercise.GetID(),
+              Name: "calories",
+              Value: excercise.GetCalories(),
+              Type: "number",
+            })
+            @TableColumn(ExerciseTableColumnViewModel{
+              ID: excercise.GetID(),
+              Name: "feeling",
+              Value: excercise.GetFeeling(),
+              Type: "text",
+            })
             <td>
               <button
                 class="btn btn-warning btn-sm text-white"
@@ -54,5 +90,126 @@ templ ExerciseTable( vm ExerciseTableViewModel ) {
       </tbody>
     </table>
   </div>
+}
+
+templ TableColumn( vm ExerciseTableColumnViewModel ) {
+  <td
+    class="group w-48"
+    hx-get={"/exercise/edit/"+ vm.Name + "/" + vm.ID + "?type=" + vm.Type}
+  >
+    <div class="flex gap-4 justify-start items-center">
+      <span>
+        {vm.Value}
+      </span>
+      <button
+        class="btn btn-ghost btn-sm bg-transparent text-transparent group-hover:text-black group-hover:bg-white rounded-md"
+      >
+        Edit
+      </button>
+    </div>
+  </td>
+}
+
+templ EditTableColumn( vm ExerciseTableColumnViewModel ) {
+  <td
+    class="w-48"
+    id={"edit-exercise-" + vm.ID + "-" + vm.Name}
+  >
+    <form
+      class="flex flex-col gap-2 justify-start items-start w-full flex-wrap"
+      hx-patch={"/exercise/update/" + vm.Name + "/" + vm.ID}
+      hx-target={"#edit-exercise-" + vm.ID + "-" + vm.Name}
+    > 
+      switch vm.Name {
+      case "feeling":
+        @FeelingSelect()
+      case "duration":
+        @DurationInputs(vm)
+      default:
+        @InputDefault(vm)
+      }
+      <input
+        type="hidden"
+        name="type"
+        value={vm.Type}
+      />
+      <menu class="flex gap-4">
+        <button
+          type="submit"
+          class="btn btn-primary btn-sm border-0 text-white rounded-md"
+        >
+          Save
+        </button>
+        <button
+          class="btn btn-ghost btn-sm rounded-md"
+          hx-target={"#edit-exercise-" + vm.ID + "-" + vm.Name}
+          hx-target-404={"#edit-exercise-" + vm.ID + "-" + vm.Name}
+          hx-get={"/exercise/show/" + vm.Name + "/" + vm.ID + "?type=" + vm.Type}
+        >
+          Cancel
+        </button>
+      </menu>
+    </form>
+
+    if vm.Error != nil {
+      <div class="alert alert-error">{vm.Error.Error()}</div>
+    }
+  </td>
+}
+
+templ FeelingSelect() {
+  <select
+    class="select select-bordered select-xs w-full text-base"
+    name="feeling"
+    required
+  >
+    <option value="">Select a feeling</option>
+    <option value="relaxed">😌 Relaxed</option>
+    <option value="normal">🙂 Normal</option>
+    <option value="focused">😎 Focused</option>
+    <option value="inspired">🚀 Inspired</option>
+    <option value="stressed">😵 Stressed</option>
+  </select>
+}
+
+templ DurationInputs(vm ExerciseTableColumnViewModel) {
+  <div class="flex justify-start items-center gap-4 flex-wrap w-full">
+    <label
+      class="form-control"
+    >
+      <span>Hours</span>
+      <input
+        class="input input-bordered input-xs"
+        placeholder="Hours"
+        name="hours"
+        value={vm.Hours}
+        type="number"
+        required
+      />
+    </label>
+    <label
+      class="form-control"
+    >
+      <span>Minutes</span>
+      <input
+        class="input input-bordered input-xs"
+        placeholder="Minutes"
+        name="minutes"
+        value={vm.Minutes}
+        type="number"
+        required
+      />
+    </label>
+  </div>
+}
+
+templ InputDefault(vm ExerciseTableColumnViewModel) {
+  <input
+    class="w-full input input-bordered input-xs"
+    placeholder={vm.Name}
+    name={vm.Name}
+    value={vm.Value}
+    type={vm.Type}
+  />
 }
 

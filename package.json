@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tailwind:dev": "tailwindcss -i ./tailwind/index.css -o ./public/assets/styles.css --minify --watch",
-    "templ:dev": "templ generate --watch --cmd=\"go run .\"",
+    "templ:dev": "templ generate --watch",
     "templ:build": "templ generate",
     "tailwind:build": "tailwindcss -i ./tailwind/index.css -o ./public/assets/styles.css --minify"
   },

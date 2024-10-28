@@ -4,6 +4,7 @@ type InputViewModel struct {
   Placeholder string
   Name string
   InputType string
+  Value string
   required bool
 }
 
@@ -18,6 +19,7 @@ templ Input(
       class="grow"
       type={vm.InputType}
       name={vm.Name}
+      value={vm.Value}
       placeholder={vm.Placeholder}
       required?={vm.required}
     />
