@@ -47,6 +47,7 @@ templ ExerciseForm(vm ExerciseFormViewModel) {
       name="feeling"
       required
     >
+      <option value="">Select a feeling</option>
       <option value="relaxed">😌 Relaxed</option>
       <option value="normal">🙂 Normal</option>
       <option value="focused">😎 Focused</option>
@@ -67,15 +68,16 @@ templ ExerciseForm(vm ExerciseFormViewModel) {
         Name: "hours",
         InputType: "number",
         required: true,
-      }, vm.Error["duration"])
+      }, vm.Error["hours"])
 
       @Input( InputViewModel{
         Placeholder: "Minutes",
         Name: "minutes",
         InputType: "number",
         required: true,
-      }, vm.Error["duration"])
-    </div>
+      }, vm.Error["minutes"])
+  </div>
+
   </label>
 
   @Input( InputViewModel{

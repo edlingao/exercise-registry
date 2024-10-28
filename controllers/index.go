@@ -23,9 +23,10 @@ func (i IndexController) Show(c echo.Context) error {
   if !ok {
     err = errors.New("User not found")
   }
-  if !ok {
+  if !ok || err != nil {
     return c.Redirect(http.StatusTemporaryRedirect, "/auth/signin")
   }
+
 	return utils.Render(
 		c,
 		view_index.Index(

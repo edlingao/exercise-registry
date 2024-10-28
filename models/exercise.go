@@ -16,6 +16,7 @@ type Exercise struct {
 	User     User      `json:"user"`
 }
 
+// Getters
 func (e Exercise) GetID() string {
 	return strconv.FormatInt(int64(e.ID), 10)
 }
@@ -36,7 +37,7 @@ func (e Exercise) GetDuration() string {
 }
 
 func (e Exercise) GetFormattedDate() string {
-	return e.Date.Format("02/01/06")
+	return e.Date.Format("2006-01-02")
 }
 
 func (e Exercise) GetFeeling() string {
@@ -55,3 +56,29 @@ func (e Exercise) GetFeeling() string {
 
 	return feeling
 }
+
+func (e Exercise)GetParam(param string) (string, bool) {
+  switch param {
+  case "id":
+    return e.GetID(), true
+  case "date":
+    return e.GetFormattedDate(), true
+  case "feeling":
+    return e.GetFeeling(), true
+  case "calories":
+    return e.GetCalories(), true
+  case "duration":
+    return e.GetDuration(), true
+  default:
+    return "", false
+  }
+}
+
+func (e Exercise) GetHours() string {
+  return strconv.FormatInt(int64(e.Hours), 10)
+}
+
+func (e Exercise) GetMinutes() string {
+  return strconv.FormatInt(int64(e.Minutes), 10)
+}
+
