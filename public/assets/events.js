@@ -1,4 +1,5 @@
-window.addEventListener('exercises:loaded', () => {
-  document.querySelector('#exercise-modal').close()
+htmx.onLoad(() =>{
+  window.addEventListener('exercises:loaded', () => {
+    document.querySelector('#exercise-modal').close()
+  })
 })
-
