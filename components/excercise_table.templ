@@ -24,13 +24,12 @@ type DurationInputViewModel struct {
 }
 
 templ ExerciseTable( vm ExerciseTableViewModel ) {
-
   if vm.Error != nil {
     <div class="alert alert-error">{vm.Error.Error()}</div>
   }
 
   <div
-    class="w-full max-h-96 overflow-x-auto"
+    class="w-full h-[80dvh] overflow-x-auto"
     hx-get="/exercise"
     hx-trigger="exercises:loaded from:body"
     hx-swap="outerHTML"
@@ -48,6 +47,13 @@ templ ExerciseTable( vm ExerciseTableViewModel ) {
         </tr>
       </thead>
       <tbody>
+        if len(vm.Exercises) == 0 {
+          <tr>
+            <td colspan="6" class="text-center text-4xl">
+              No data available 😢
+            </td>
+          </tr>
+        }
         for _, excercise := range vm.Exercises {
           <tr class="hover h-24">
             <td>{excercise.GetID()}</td>
@@ -94,7 +100,7 @@ templ ExerciseTable( vm ExerciseTableViewModel ) {
 
 templ TableColumn( vm ExerciseTableColumnViewModel ) {
   <td
-    class="group w-48"
+    class="group min-w-52"
     hx-get={"/exercise/edit/"+ vm.Name + "/" + vm.ID + "?type=" + vm.Type}
   >
     <div class="flex gap-4 justify-start items-center">
